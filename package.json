@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "lint:ci": "eslint $(git diff --diff-filter=ACMRTUXB --relative --name-only master -- src/ | grep -E '.(ts|tsx)$' | xargs)",
+    "format:ci": "prettier --write $(git diff --diff-filter=ACMRTUXB --relative --name-only master -- src/ | grep -E '.(ts|tsx)$' | xargs)"
   },
   "dependencies": {
     "axios": "^1.2.2",
