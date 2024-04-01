@@ -1,7 +1,59 @@
-table {
-  width: 100%;
+.people-wrapper {
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
 
-th {
+table {
+  min-width: 1028px;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
   text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.people-wrapper th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.people-wrapper tr:hover {
+  background-color: #e0e0e0;
+}
+
+.people-wrapper input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.people-wrapper select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.people-wrapper button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.people-wrapper button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.people-wrapper button:not(:last-child) {
+  margin-right: 10px;
 }
