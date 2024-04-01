@@ -14,7 +14,7 @@ import Input from "../../components/Input/input";
 import Pagination from "../../components/Pagination/pagination";
 
 import "./people.css";
-import AddPeopleModal from "./modal/AddPeople.modal";
+import { AddPeopleModal } from "./modal/addPeopleModal";
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE = 1;

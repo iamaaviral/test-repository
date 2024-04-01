@@ -23,7 +23,7 @@ interface FormData {
   movies: Movie[];
 }
 
-const AddPeopleModal: React.FC<AddPeopleModalProps> = ({
+export const AddPeopleModal: React.FC<AddPeopleModalProps> = ({
   isOpen,
   setIsOpen,
   sortedPeople,
@@ -165,5 +165,3 @@ const AddPeopleModal: React.FC<AddPeopleModalProps> = ({
     </Modal>
   );
 };
-
-export default AddPeopleModal;

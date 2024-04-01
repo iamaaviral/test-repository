@@ -20,11 +20,11 @@ jobs:
       - name: Check Typescript
         run: yarn tsc
 
-      - name: Check Formatting
-        run:  yarn format:ci
-
       - name: Check Linting
         run: yarn lint:ci
+
+      - name: Check Formatting
+        run:  yarn format:ci
 
       - name: Run Unit and Integration Tests
         run: yarn test run
