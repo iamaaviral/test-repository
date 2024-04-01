@@ -1,4 +1,11 @@
 import { useState } from "react";
+import { format as formatDate } from 'date-fns'
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowDownAZ,
+  faArrowDownZA,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { Person } from "./model";
 import { usePeopleQuery } from "./query";
@@ -7,6 +14,7 @@ import Input from "../../components/Input/input";
 import Pagination from "../../components/Pagination/pagination";
 
 import "./people.css";
+import AddPeopleModal from "./modal/AddPeople.modal";
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE = 1;
@@ -18,21 +26,14 @@ export function People() {
   const [sortedPeople, setSortedPeople] = useState<Person[]>([]);
   const [displayPerPage, setDisplayPerPage] = useState(DEFAULT_PAGE_SIZE);
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE);
-
-  const filteredPeople = sortedPeople.filter((person) =>
-    person.name.toLowerCase().includes(searchText.toLowerCase())
-  );
-
-  const startIndex = (currentPage - 1) * displayPerPage;
-  const endIndex = Math.min(filteredPeople.length, startIndex + displayPerPage);
-  const displayedPeople = filteredPeople.slice(startIndex, endIndex);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const renderCells = ({ name, show, actor, movies, dob }: Person) => (
     <>
       <td>{name}</td>
       <td>{show}</td>
       <td>{actor}</td>
-      <td>{dob}</td>
+      <td>{formatDate(new Date(dob), 'do LLLL, yyyy')}</td>
       <td>{movies.map(({ title }) => title).join(", ")}</td>
     </>
   );
@@ -68,6 +69,14 @@ export function People() {
     setCurrentPage(page);
   };
 
+  const filteredPeople = sortedPeople.filter((person) =>
+    person.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  const startIndex = (currentPage - 1) * displayPerPage;
+  const endIndex = Math.min(filteredPeople.length, startIndex + displayPerPage);
+  const displayedPeople = filteredPeople.slice(startIndex, endIndex);
+
   if (loading) {
     return <p>Fetching People...</p>;
   }
@@ -78,22 +87,34 @@ export function People() {
 
   return (
     <div className="people-wrapper">
-      <div className="searchBar">
+      <div className="topbar-wrapper">
         <Input
           onChange={handleSearch}
           value={searchText}
           placeholder="Search"
+          className="searchbar"
+        />
+        <button onClick={() => setIsModalOpen(true)}>Add</button>
+        <AddPeopleModal
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+          sortedPeople={sortedPeople}
+          setSortedPeople={setSortedPeople}
         />
       </div>
       <table>
         <thead>
           <tr>
             <th
+              className="name-header"
               role="columnheader"
               onClick={handleSort}
               aria-sort={sortDirection === "asc" ? "ascending" : "descending"}
             >
               Name
+              <FontAwesomeIcon
+                icon={sortDirection === "asc" ? faArrowDownAZ : faArrowDownZA}
+              />
             </th>
             <th>Show</th>
             <th>Actor/Actress</th>
@@ -101,8 +122,12 @@ export function People() {
             <th>Movies</th>
           </tr>
         </thead>
-        {displayedPeople.length === 0 && <div className="no-result"><h2>No People Available.</h2></div>}
         <tbody>
+          {displayedPeople.length === 0 && (
+            <div className="no-result">
+              <h2>No People Available.</h2>
+            </div>
+          )}
           {displayedPeople.map((people) => (
             <tr key={people.id}>{renderCells(people)}</tr>
           ))}

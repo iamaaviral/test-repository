@@ -6,15 +6,33 @@
 }
 
 table {
-  min-width: 1028px;
+  width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #ccc;
+}
+
+.topbar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchbar {
+  flex-grow: 1;
+}
+
+.people-wrapper .name-header {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  cursor: pointer;
 }
 
 .people-wrapper th {
@@ -31,7 +49,6 @@ th, td {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  margin-bottom: 10px;
 }
 
 .people-wrapper select {

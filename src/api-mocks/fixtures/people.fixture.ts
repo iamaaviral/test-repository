@@ -1,5 +1,20 @@
 import { Person } from "../../app/modules/people";
 
+export const NEW_PEOPLE: Person = {
+  id: "63b5d67944d6dc30c633234",
+  name: "The Rock",
+  show: "WWE",
+  actor: "Dwyane Jhonson",
+  movies: [
+    {
+      title: "Jumanji",
+      released: "2020-06-24T03:26:18.836Z",
+    },
+  ],
+  dob: "2014-05-09T22:35:07.331Z",
+  updatedAt: "2023-01-05T19:41:45.990Z",
+}
+
 export const PEOPLE: Person[] = [
   {
     id: "63b5d679fc0503625d6f22de",

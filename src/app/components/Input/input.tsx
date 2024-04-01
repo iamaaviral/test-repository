@@ -5,6 +5,7 @@ interface InputProps {
   onChange: (value: string) => void;
   placeholder?: string;
   label?: string;
+  className?: string
 }
 
 const Input: React.FC<InputProps> = ({
@@ -12,13 +13,14 @@ const Input: React.FC<InputProps> = ({
   onChange,
   placeholder = '',
   label = '',
+  className
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
 
   return (
-    <div>
+    <>
       {label && <label>{label}</label>}
       <input
         aria-label="Search"
@@ -26,8 +28,9 @@ const Input: React.FC<InputProps> = ({
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
+        className={className}
       />
-    </div>
+    </>
   );
 };
 
